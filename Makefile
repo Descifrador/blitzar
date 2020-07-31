@@ -8,7 +8,7 @@ LDFLAGS = -m elf_i386 -T linker.ld
 OBJS = Objects/kernel.o Objects/boot.o Objects/common.o Objects/error.o Objects/gdt.o Objects/idt.o Objects/irq.o Objects/isr.o Objects/keyboard.o Objects/screencontroller.o Objects/shell.o Objects/timer.o Objects/vga.o Objects/functions.o
 OUTPUT = os/boot/kernel.bin
 
-run:all
+run:build
 
 all:$(OBJS)
 	mkdir os/ -p
