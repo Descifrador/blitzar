@@ -71,3 +71,4 @@ build:all
 clear:
 	rm -f Objects/*.o
 	rm -r -f os/
+	rm os.iso

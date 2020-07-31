@@ -6,3 +6,5 @@ int fibonacci(string num);
 void help();
 void gift_art(string name);
 int solve(string expr);
+int palin(string name);
+int binary(int num);

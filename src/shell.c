@@ -58,17 +58,31 @@ void findCommand(string command)
             print("enter something");
         }
     }
-    else if (startswith(command, "solve"))
+    else if (startswith(command, "palin"))
     {
-        if (strlen(command) >= strlen("solve a + b"))
+        if (strlen(command) >= strlen("palin a"))
         {
             substring(command, command, 6);
-            int result = solve(command);
+            int result = palin(command);
             printnum(result);
         }
         else
         {
-            print("Enter an expression");
+            print("Enter an string");
+        }
+    }
+    else if (startswith(command, "binary"))
+    {
+        if (strlen(command) >= strlen("binary a"))
+        {
+            substring(command, command, 7);
+            int num = toInt(command);
+            int bin = binary(num);
+            printnum(bin);
+        }
+        else
+        {
+            print("enter a number");
         }
     }
     else if (strcmp(command, "cls"))

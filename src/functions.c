@@ -23,122 +23,35 @@ int fibonacci(string num)
     return arr[last - 1];
 }
 
-int precedence(string op)
+int palin(string name)
 {
-    if (strcmp(op, "+") || strcmp(op, "-"))
-        return 1;
-    if (strcmp(op, "/") || strcmp(op, "*"))
-        return 2;
-    return 0;
-}
-int applyOp(int a, int b, string op)
-{
-    if (strcmp(op, "/"))
+    int len = strlen(name);
+    for (int i = 0; i < len / 2; i++)
     {
-        return a / b;
-    }
-    else if (strcmp(op, "*"))
-    {
-        return a * b;
-    }
-    else if (strcmp(op, "-"))
-    {
-        return a - b;
-    }
-    else if (strcmp(op, "+"))
-    {
-        return a + b;
-    }
-}
-
-int solve(string expr)
-{
-    string token[20];
-    int num_tok = 0;
-    for (int i = 0; i < 20; i++)
-    {
-        char temp[10];
-        splitstr(expr, temp);
-        if (strcmp(expr, temp))
+        if (name[i] == name[len - i - 1])
         {
-            break;
-        }
-        strcpy(token[i], temp);
-        num_tok++;
-    }
-    string ops[num_tok];
-    int values[num_tok];
-    int ops_top = -1, values_top = -1;
-    for (int k = 0; k < num_tok; k++)
-    {
-        if (strcmp(token[k], "("))
-        {
-            ops_top++;
-            strcpy(ops[ops_top], token[k]);
-        }
-        else if (isDigit(token[k]))
-        {
-            values_top++;
-            values[values_top] = toInt(token[k]);
-        }
-        else if (strcmp(token[k], ")"))
-        {
-            while (ops_top != -1 && strcmp(ops[ops_top], "("))
-            {
-                int val2 = values[values_top];
-                values_top--;
-                int val1 = values[values_top];
-                values_top--;
-
-                string op = ops[ops_top];
-                ops_top--;
-
-                values_top++;
-                values[values_top] = applyOp(val1, val2, op);
-            }
-            if (ops_top != -1)
-            {
-                ops_top--;
-            }
+            continue;
         }
         else
         {
-            while (ops_top != -1 && precedence(ops[ops_top]) >= precedence(token[k]))
-            {
-                int val2 = values[values_top];
-                values_top--;
-
-                int val1 = values[values_top];
-                values_top--;
-
-                string op = ops[ops_top];
-                ops_top--;
-
-                values_top++;
-                values[values_top] = applyOp(val1, val2, op);
-            }
-            ops_top++;
-            strcpy(ops[ops_top], token[k]);
+            return 0;
         }
     }
-    while (ops_top != -1)
+    return 1;
+}
+
+int binary(int num)
+{
+    int expo = 1;
+    int result = 0;
+    while (num != 0)
     {
-        int val2 = values[values_top];
-        values_top--;
-
-        int val1 = values[values_top];
-        values_top--;
-
-        string op = ops[ops_top];
-        ops_top--;
-
-        values_top++;
-        values[values_top] = applyOp(val1, val2, op);
-
-        values_top++;
-        values[values_top] = applyOp(val1, val2, op);
+        int rem = num % 2;
+        result += rem * expo;
+        expo *= 10;
+        num /= 2;
     }
-    return values[values_top];
+    return result;
 }
 
 void help()

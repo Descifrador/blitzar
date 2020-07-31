@@ -281,7 +281,7 @@ void splitstr(char a[], char b[])
 {
     for (int i = 0; i < strlen(a); i++)
     {
-        if (a[i] != ' ' || a[i] != '\0')
+        if (a[i] != ' ')
         {
             b[i] = a[i];
         }
